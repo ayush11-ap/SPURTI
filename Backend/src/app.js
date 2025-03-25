@@ -1,10 +1,11 @@
 const express = require("express");
 const connectDB = require("./db/database");
-const userRouter = require("./routes/user.routes");
 
 const app = express();
 
 const cookieParser = require("cookie-parser");
+const userRouter = require("./routes/user.routes");
+const problemRouter = require("./routes/problem.routes");
 
 require("dotenv").config();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 // });
 
 app.use("/user", userRouter);
+app.use("/problem", problemRouter);
 
 connectDB()
   .then(() => {
