@@ -1,31 +1,19 @@
 const express = require("express");
-const { validateSignUpData } = require("../utils/user.validate");
-const User = require("../models/users.model");
-const bcrypt = require("bcrypt");
+const {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUserProfile,
+} = require("../controllers/user.controller");
 
 const userRouter = express.Router();
 
-userRouter.post("/register", async (req, res) => {
-  try {
-    validateSignUpData(req);
+userRouter.post("/register", registerUser);
 
-    const { name, email, password, mobileNo, role, address } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 12);
-    console.log(hashedPassword);
+userRouter.post("/login", loginUser);
 
-    const user = new User({
-      name,
-      email,
-      mobileNo,
-      password: hashedPassword,
-      role,
-      address,
-    });
-    await user.save();
-    res.send("User Created Successfully");
-  } catch (error) {
-    res.status(400).send("Error While Saving the user : " + error.message);
-  }
-});
+// userRouter.get("/profile", getUserProfile);
+
+userRouter.post("/logout", logoutUser);
 
 module.exports = userRouter;
