@@ -14,6 +14,7 @@ Registers a new user.
 - `mobileNo` (string): The mobile number of the user.
 - `role` (string): The role of the user.
 - `address` (string): The address of the user.
+- `roleDetails` (object): Additional details based on the user's role.
 
 **Responses:**
 
@@ -28,8 +29,13 @@ Registers a new user.
   "email": "ayush@gmail.com",
   "password": "Password@123",
   "mobileNo": "1234567890",
-  "role": "user",
-  "address": "123 Main St"
+  "address": "123 Main St",
+  "role": "NGO",
+  "roleDetails": {
+    "ngoName": "Helping Hands",
+    "ngoDescription": "We provide education to underprivileged children.",
+    "workField": "Education & Welfare"
+  }
 }
 ```
 
@@ -55,6 +61,23 @@ Logs in a user.
   "password": "Password@123"
 }
 ```
+
+### GET /user/profile
+
+Fetches the profile of the logged-in user.
+
+**Headers:**
+
+- `Cookie`: Include the `token` cookie received during login.
+
+**Responses:**
+
+- `200 OK`: Returns the user's profile.
+- `401 Unauthorized`: Error in Authentication : {error message}
+
+**Postman Example:**
+
+No request body required. Ensure the `token` cookie is set in the request headers.
 
 ### POST /user/logout
 

@@ -7,7 +7,8 @@ module.exports.registerUser = async (req, res) => {
   try {
     validateSignUpData(req);
 
-    const { name, email, password, mobileNo, role, address } = req.body;
+    const { name, email, password, mobileNo, role, address, roleDetails } =
+      req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
     console.log(hashedPassword);
 
@@ -18,6 +19,7 @@ module.exports.registerUser = async (req, res) => {
       password: hashedPassword,
       role,
       address,
+      roleDetails,
     });
     await user.save();
     res.send("User Created Successfully");
@@ -56,19 +58,17 @@ module.exports.loginUser = async (req, res) => {
   }
 };
 
-// Authentication Middleware Required
-
-// module.exports.getUserProfile = async (req, res) => {
-//     try {
-//         const user = req.user;
-//         if(!user){
-//             throw new Error("User not found!");
-//         }
-//         res.json(user);
-//     } catch (error) {
-//         res.status(400).send("Error While Fetching the user:" + error.message)
-//     }
-// };
+module.exports.getUserProfile = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(400).send("Error While Fetching the user:" + error.message);
+  }
+};
 
 module.exports.logoutUser = async (req, res) => {
   res

@@ -33,7 +33,18 @@ const userSchema = new Schema(
     role: {
       type: String,
       required: [true, "Role is required"],
-      enum: ["communityLeader", "NGO", "Expert", "Donor", "volunteer"],
+      enum: [
+        "Residential",
+        "NGO",
+        "Expert",
+        "Donor",
+        "volunteer",
+        "Spurti Volunteer",
+      ],
+    },
+    roleDetails: {
+      type: Schema.Types.Mixed,
+      default: {},
     },
   },
   { timestamps: true }
