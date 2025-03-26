@@ -6,6 +6,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const userRouter = require("./routes/user.routes");
 const problemRouter = require("./routes/problem.routes");
+const verifyRouter = require("./routes/verify.routes");
 
 require("dotenv").config();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 app.use("/user", userRouter);
 app.use("/problem", problemRouter);
+app.use("/verify", verifyRouter);
 
 connectDB()
   .then(() => {

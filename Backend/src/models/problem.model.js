@@ -67,7 +67,11 @@ const ProblemSchema = new mongoose.Schema(
       default: "pending",
     },
     assignedExperts: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    votes: { type: Number, default: 0, min: 0 }, // Community votes, cannot be negative
+    votes: { type: Number, default: 0, min: 0 },
+    address: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
