@@ -3,11 +3,13 @@ const { userAuth } = require("../middlewares/auth.middleware");
 const {
   registerProblem,
   problemFeed,
+  aiProblemAnalysis,
 } = require("../controllers/problem.controller");
 
 const problemRouter = express.Router();
 
 problemRouter.post("/submit", userAuth, registerProblem);
 problemRouter.get("/allProblems", userAuth, problemFeed);
+problemRouter.get("/aiAnalysis", userAuth, aiProblemAnalysis);
 
 module.exports = problemRouter;
